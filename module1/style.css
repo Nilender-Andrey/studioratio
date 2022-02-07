@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./assets/fonts/Ubuntu-Regular.ttf');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./assets/fonts/Ubuntu-Medium.ttf');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./assets/fonts/Ubuntu-Bold.ttf');
+  font-weight: 700;
+}
+
+:root {
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 20px;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+body {
+  background: linear-gradient(180deg, #f6fafd 0%, #ffffff 19.4%) no-repeat;
+
+  font-family: Inter, sans-serif;
+  color: var(--white-color);
+}
+
+.header {
+  display: flex;
+  max-width: 1248px;
+}
+
+.logo {
+  width: 49px;
+  height: 35px;
+
+  background: url('./assets/img/Logo.png') center/contain no-repeat;
+}
