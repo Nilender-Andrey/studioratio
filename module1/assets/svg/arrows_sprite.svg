@@ -1,0 +1,16 @@
+<svg width="0" height="0" class="hidden">
+  <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 16" id="arrow">
+    <path d="M15.2852 15.001L21.2852 8.00098L15.2852 1.00098" stroke="#9C69E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M21.2852 8.00098H1.28516" stroke="#9C69E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+  </symbol>
+  <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 16" id="arrow_big">
+    <path d="M7 1L1 8L7 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M0.999998 8L41 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+  </symbol>
+  <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 16" id="arrow_small">
+    <g opacity="0.5">
+      <path d="M15 15L21 8L15 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M21 8H1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </g>
+  </symbol>
+</svg>
