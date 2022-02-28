@@ -19,6 +19,7 @@
   --info-font-color: #faf8ee;
 
   --btn-font-color: #faf8ee;
+  --btn-bg-color: #927963;
 
   --font-color: #796e64;
 }
@@ -168,14 +169,25 @@ body {
   padding: 15px;
   margin-left: 10px;
 
-  border: none;
   outline: none;
-  background-color: #927963;
+  border: 1px solid var(--btn-bg-color);
+  background-color: var(--btn-bg-color);
   border-radius: 5px;
   cursor: pointer;
 
   font-size: 16px;
   color: var(--btn-font-color);
+
+  transition: 0.3s all;
+}
+
+.game__new-game-btn:hover {
+  color: var(--btn-bg-color);
+  background-color: var(--btn-font-color);
+}
+
+.game__new-game-btn:active {
+  transform: scale(0.97);
 }
 
 @media screen and (max-width: 500px), screen and (max-height: 640px) {
