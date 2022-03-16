@@ -1,4 +1,6 @@
+import Keyboard from './Keyboard';
 import Swipe from './Swipe';
+import Game from './Game';
 
 class Control {
   parentElement: HTMLElement;
@@ -7,22 +9,41 @@ class Control {
   score: HTMLElement | null = null;
   moves: HTMLElement | null = null;
   btnNewGame: HTMLElement | null = null;
-  gameBody: HTMLButtonElement | null = null;
+  gameBody: HTMLElement | null = null;
+
+  static playGame: Game | null = null;
 
   constructor(parentElement: HTMLElement) {
     this.parentElement = parentElement;
 
     this.activeParts();
-    this.newGame();
-    this.keyboard();
+    this.addListenerNewGame();
 
-    if (this.gameBody)
+    if (this.gameBody) {
       new Swipe(this.gameBody, {
         minDistance: 100,
       });
+      new Keyboard();
+    }
   }
 
-  activeParts = () => {
+  static moveLeft() {
+    if (Control.playGame) Control.playGame.moveLeft();
+  }
+
+  static moveRight() {
+    if (Control.playGame) Control.playGame.moveRight();
+  }
+
+  static moveUp() {
+    if (Control.playGame) Control.playGame.moveUp();
+  }
+
+  static moveDown() {
+    if (Control.playGame) Control.playGame.moveDown();
+  }
+
+  private activeParts = () => {
     this.game = this.parentElement.querySelector('.game');
     if (this.game) {
       this.score = this.game.querySelector('.info-game__score');
@@ -32,36 +53,21 @@ class Control {
     }
   };
 
-  newGame = () => {
-    if (this.btnNewGame)
-      this.btnNewGame.addEventListener('click', () => console.log('111'));
+  private addListenerNewGame = () => {
+    if (this.btnNewGame) {
+      this.btnNewGame.addEventListener('click', this.newGame);
+    }
   };
 
-  keyboard = () => {
-    if (this.gameBody)
-      document.addEventListener('keydown', (e: KeyboardEvent) => {
-        switch (e.code) {
-          case 'ArrowLeft':
-            console.log('ArrowLeft');
-            break;
-          case 'ArrowRight':
-            console.log('ArrowRight');
-            break;
-          case 'ArrowUp':
-            console.log('ArrowUp');
-            break;
-          case 'ArrowDown':
-            console.log('ArrowDown');
-            break;
-        }
-      });
-  };
+  private newGame = () => {
+    if (this.score && this.moves && this.gameBody) {
+      Control.playGame = null;
 
-  swipeStart = () => {
-    if (this.gameBody) {
-      this.gameBody.addEventListener('mousedown', (e: Event) => {
-        console.log(e.target);
-      });
+      this.gameBody
+        .querySelectorAll('.game-cell')
+        .forEach((item) => item.remove());
+
+      Control.playGame = new Game(this.score, this.moves, this.gameBody);
     }
   };
 }

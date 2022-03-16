@@ -94,10 +94,71 @@ body {
   align-items: center;
   justify-content: center;
 
-  background-color: rgba(255, 0, 0, 0.39);
-
   font-weight: 700;
   color: var(--cell-font-color);
+
+  transform: scale(1);
+
+  transition: top 0.25s linear 0s, left 0.25s linear 0s;
+}
+
+.game-cell_color-color_2 {
+  z-index: 2;
+  background-color: #ff000d;
+}
+.game-cell_color-color_4 {
+  z-index: 4;
+  background-color: #ff00d4;
+}
+.game-cell_color-color_8 {
+  z-index: 8;
+  background-color: #2f00ff;
+}
+.game-cell_color-color_16 {
+  z-index: 16;
+  background-color: #00aeff;
+}
+.game-cell_color-color_32 {
+  z-index: 2;
+  background-color: #00ffbf;
+}
+.game-cell_color-color_64 {
+  z-index: 2;
+  background-color: #00ff80;
+}
+.game-cell_color-color_128 {
+  z-index: 2;
+  background-color: #00ff15;
+}
+.game-cell_color-color_256 {
+  z-index: 2;
+  background-color: #48ff00;
+}
+.game-cell_color-color_512 {
+  z-index: 2;
+  background-color: #ffee00;
+}
+.game-cell_color-color_1024 {
+  z-index: 2;
+  background-color: #ffbb00;
+}
+.game-cell_color-color_2048 {
+  z-index: 2;
+  background-color: #ff8800;
+}
+
+.game-cell_animate-add {
+  animation: add 0.15s linear;
+}
+
+@keyframes add {
+  0% {
+    transform: scale(0.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* game__header */

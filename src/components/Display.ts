@@ -20,7 +20,6 @@ class Display {
 
   private addGame = () => {
     this.game.className = 'game';
-
     this.game.append(this.gameHeader, this.gameBody);
   };
 
