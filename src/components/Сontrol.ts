@@ -1,6 +1,7 @@
 import Keyboard from './Keyboard';
 import Swipe from './Swipe';
-import Game from './Game';
+import Game from './gaming-logic/Game';
+import Result from './result/Result';
 
 class Control {
   parentElement: HTMLElement;
@@ -9,6 +10,7 @@ class Control {
   score: HTMLElement | null = null;
   moves: HTMLElement | null = null;
   btnNewGame: HTMLElement | null = null;
+  btnOptions: HTMLElement | null = null;
   gameBody: HTMLElement | null = null;
 
   static playGame: Game | null = null;
@@ -27,20 +29,10 @@ class Control {
     }
   }
 
-  static moveLeft() {
-    if (Control.playGame) Control.playGame.moveLeft();
-  }
-
-  static moveRight() {
-    if (Control.playGame) Control.playGame.moveRight();
-  }
-
-  static moveUp() {
-    if (Control.playGame) Control.playGame.moveUp();
-  }
-
-  static moveDown() {
-    if (Control.playGame) Control.playGame.moveDown();
+  static move(direction: 'moveLeft' | 'moveRight' | 'moveUp' | 'moveDown') {
+    if (Control.playGame) {
+      Control.playGame.step(direction);
+    }
   }
 
   private activeParts = () => {
@@ -49,6 +41,7 @@ class Control {
       this.score = this.game.querySelector('.info-game__score');
       this.moves = this.game.querySelector('.info-game__time');
       this.btnNewGame = this.game.querySelector('.game__new-game-btn');
+      this.btnOptions = this.game.querySelector('.game__options-btn');
       this.gameBody = this.game.querySelector('.game__body');
     }
   };
@@ -60,14 +53,20 @@ class Control {
   };
 
   private newGame = () => {
-    if (this.score && this.moves && this.gameBody) {
+    if (this.game && this.score && this.moves && this.gameBody) {
       Control.playGame = null;
 
       this.gameBody
         .querySelectorAll('.game-cell')
         .forEach((item) => item.remove());
 
-      Control.playGame = new Game(this.score, this.moves, this.gameBody);
+      const renderResult = new Result(this.game).render;
+      Control.playGame = new Game(
+        this.score,
+        this.moves,
+        this.gameBody,
+        renderResult,
+      );
     }
   };
 }

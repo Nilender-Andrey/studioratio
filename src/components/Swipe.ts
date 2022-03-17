@@ -69,7 +69,7 @@ class Swipe {
 
       if (distance > this.minDistance) {
         const directions = Swipe.getDirections(offsets);
-        Control[directions]();
+        Control.move(directions);
       }
     }
     this.startPos = { x: 0, y: 0 };

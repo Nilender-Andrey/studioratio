@@ -6,20 +6,23 @@ class Keyboard {
   }
 
   private handler = (e: KeyboardEvent) => {
+    let direction: 'moveLeft' | 'moveRight' | 'moveUp' | 'moveDown' =
+      'moveLeft';
     switch (e.code) {
       case 'ArrowLeft':
-        Control.moveLeft();
+        direction = 'moveLeft';
         break;
       case 'ArrowRight':
-        Control.moveRight();
+        direction = 'moveRight';
         break;
       case 'ArrowUp':
-        Control.moveUp();
+        direction = 'moveUp';
         break;
       case 'ArrowDown':
-        Control.moveDown();
+        direction = 'moveDown';
         break;
     }
+    Control.move(direction);
   };
 
   private addListeners = () => {
