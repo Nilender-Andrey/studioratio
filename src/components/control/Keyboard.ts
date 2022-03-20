@@ -1,8 +1,10 @@
-import Control from './Сontrol';
+import { MoveType } from '../../types/type';
 
 class Keyboard {
-  constructor() {
+  move: MoveType;
+  constructor(move: MoveType) {
     this.addListeners();
+    this.move = move;
   }
 
   private handler = (e: KeyboardEvent) => {
@@ -22,7 +24,7 @@ class Keyboard {
         direction = 'moveDown';
         break;
     }
-    Control.move(direction);
+    this.move(direction);
   };
 
   private addListeners = () => {

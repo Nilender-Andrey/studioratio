@@ -1,7 +1,7 @@
+import State from '../../state/State';
+import { RenderResultType } from '../../types/type';
 import MovePossibilityCheck from './Move-possibility-check';
 import Utils from './Utils';
-
-type RenderResultType = (isWin?: boolean, pointsScored?: number) => void;
 
 class Game {
   private result: number;
@@ -26,7 +26,7 @@ class Game {
     renderResult: RenderResultType,
   ) {
     this.result = 0;
-    this.scoreForWin = 32; /* 2048; */ //!
+    this.scoreForWin = 4; // 2048;
     this.moves = 0;
     this.field = [
       [0, 0, 0, 0, 0],
@@ -58,7 +58,7 @@ class Game {
   }
 
   step = (direction: 'moveLeft' | 'moveRight' | 'moveUp' | 'moveDown') => {
-    this[direction]();
+    if (!State.isGameStop) this[direction]();
   };
 
   moveLeft() {
@@ -279,14 +279,18 @@ class Game {
       !this.isAllowedToUp &&
       !this.isAllowedToDown
     ) {
-      this.renderResult(this.isWin, this.moves);
+      this.renderResult({
+        isWin: false,
+        score: this.result,
+        steps: this.moves,
+      });
     }
   };
 
   private checkToWin = (num: number) => {
     if (num >= this.scoreForWin) {
       this.isWin = true;
-      this.renderResult(this.isWin, this.moves);
+      this.renderResult({ isWin: true, score: this.result, steps: this.moves });
     }
   };
 

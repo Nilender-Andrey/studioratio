@@ -1,4 +1,4 @@
-import Control from './Сontrol';
+import { MoveType } from '../../types/type';
 
 type optionsType = {
   minDistance?: number;
@@ -19,11 +19,13 @@ class Swipe {
   didDown: boolean = false;
   startPos: offsetsType = { x: 0, y: 0 };
   endPos: offsetsType = { x: 0, y: 0 };
+  move: MoveType;
 
-  constructor(elem: HTMLElement, options: optionsType) {
+  constructor(elem: HTMLElement, move: MoveType, options?: optionsType) {
     this.elem = elem;
-    this.minDistance = options.minDistance || 100;
-    this.maxTime = options.maxTime || 500;
+    this.minDistance = options?.minDistance || 100;
+    this.maxTime = options?.maxTime || 500;
+    this.move = move;
 
     this.addListeners();
   }
@@ -69,7 +71,7 @@ class Swipe {
 
       if (distance > this.minDistance) {
         const directions = Swipe.getDirections(offsets);
-        Control.move(directions);
+        this.move(directions);
       }
     }
     this.startPos = { x: 0, y: 0 };

@@ -1,0 +1,46 @@
+.game__result {
+  position: absolute;
+  bottom: var(--game-header-padding);
+  z-index: 9999999;
+
+  display: block;
+
+  width: calc(100% - var(--game-header-padding));
+  height: calc(100% - var(--game-header-height) - var(--game-header-padding));
+
+  border-radius: var(--border-radius-default);
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: var(--border-radius-default);
+  border: 5px solid var(--result-form-border-color);
+  background-color: var(--result-form-bg);
+
+  text-align: center;
+}
+
+.result__wrap {
+  font-size: 30px;
+}
+
+.result__img {
+  width: 45%;
+}
+
+.result__text span {
+  font-weight: 700;
+}
+
+.result__input-name {
+  width: 90%;
+  max-width: 450px;
+  padding: 3px 5px;
+  font-size: 28px;
+}

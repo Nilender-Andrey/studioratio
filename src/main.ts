@@ -1,5 +1,5 @@
 import Display from './components/Display';
-import Control from './components/Сontrol';
+import Control from './components/control/Сontrol';
 import './style.css';
 
 class Start {
