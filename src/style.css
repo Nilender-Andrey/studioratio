@@ -203,6 +203,16 @@ body {
   }
 }
 
+@keyframes remove {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
 /* game__header */
 
 .game__header {

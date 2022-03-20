@@ -26,7 +26,7 @@ class Game {
     renderResult: RenderResultType,
   ) {
     this.result = 0;
-    this.scoreForWin = 4; // 2048;
+    this.scoreForWin = 2048;
     this.moves = 0;
     this.field = [
       [0, 0, 0, 0, 0],
@@ -61,6 +61,11 @@ class Game {
     if (!State.isGameStop) this[direction]();
   };
 
+  end = () => {
+    this.tact();
+    Utils.playSound('step');
+  };
+
   moveLeft() {
     if (!this.isAllowedToLeft || this.isWin) return;
     this.updateMoves();
@@ -93,7 +98,7 @@ class Game {
       }
     }
 
-    this.tact();
+    this.end();
   }
 
   moveRight() {
@@ -128,7 +133,7 @@ class Game {
       }
     }
 
-    this.tact();
+    this.end();
   }
 
   moveUp() {
@@ -163,7 +168,7 @@ class Game {
       }
     }
 
-    this.tact();
+    this.end();
   }
 
   moveDown() {
@@ -198,7 +203,7 @@ class Game {
         }
       }
     }
-    this.tact();
+    this.end();
   }
 
   private changeElem = (
@@ -279,6 +284,7 @@ class Game {
       !this.isAllowedToUp &&
       !this.isAllowedToDown
     ) {
+      Utils.playSound('lose');
       this.renderResult({
         isWin: false,
         score: this.result,
@@ -289,6 +295,7 @@ class Game {
 
   private checkToWin = (num: number) => {
     if (num >= this.scoreForWin) {
+      Utils.playSound('win');
       this.isWin = true;
       this.renderResult({ isWin: true, score: this.result, steps: this.moves });
     }

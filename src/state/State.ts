@@ -6,14 +6,14 @@ class State {
   static idGame: string | null = null;
   static gameStartTime: number = Date.now();
   static rating: IRatingData[] = [
-    { name: 'test_2', isWin: false, steps: 20, score: 20, time: 20 },
+    /*  { name: 'test_2', isWin: false, steps: 20, score: 20, time: 20 },
     { name: 'test_3', isWin: true, steps: 30, score: 20, time: 20 },
     { name: 'test_2', isWin: false, steps: 20, score: 20, time: 20 },
-    { name: 'test_3', isWin: true, steps: 30, score: 20, time: 20 },
+    { name: 'test_3', isWin: true, steps: 30, score: 20, time: 20 }, */
   ];
 
   static getRating = () => {
-    return this.rating.sort((a, b) => a.steps - b.steps);
+    return this.rating.sort((a, b) => a.time - b.time);
   };
 
   static gameStarts = () => {

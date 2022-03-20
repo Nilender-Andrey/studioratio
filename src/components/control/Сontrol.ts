@@ -15,7 +15,7 @@ class Control {
   private btnNewGame: HTMLElement | null = null;
   private btnOptions: HTMLElement | null = null;
   private gameBody: HTMLElement | null = null;
-  private rating: HTMLElement | null = null;
+  private rating: Rating | null = null;
   private playGame: Game | null = null;
 
   constructor(parentElement: HTMLElement) {
@@ -83,11 +83,8 @@ class Control {
   private openOptions = () => {
     if (this.game) {
       if (!this.rating) {
-        State.isGameStop = true;
-        new Rating(this.game);
-        this.rating = this.game.querySelector('.game__rating');
+        this.rating = new Rating(this.game);
       } else {
-        State.isGameStop = false;
         this.rating.remove();
         this.rating = null;
       }

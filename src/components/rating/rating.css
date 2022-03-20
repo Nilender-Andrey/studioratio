@@ -7,6 +7,18 @@
   height: calc(100% - var(--game-header-height) - var(--game-header-padding));
 
   border-radius: var(--border-radius-default);
+
+  animation: add ease-out 0.3s forwards;
+}
+
+.game__rating_animate-add {
+  transform: scale(0);
+  animation: add ease-out 0.3s forwards;
+}
+
+.game__rating_animate-remove {
+  transform: scale(0);
+  animation: remove ease-out 0.3s forwards;
 }
 
 .rating {

@@ -39,6 +39,11 @@ class Utils {
     const numLength = num.toString().length;
     return numLength === 1 ? baseFontSize : baseFontSize - numLength * 5;
   };
+
+  static playSound(filename: string) {
+    const sound = new Audio(`./../src/assets/audio/${filename}.mp3`);
+    sound.play();
+  }
 }
 
 export default Utils;

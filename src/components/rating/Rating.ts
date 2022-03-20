@@ -12,11 +12,12 @@ class Rating {
     this.gameRating = document.createElement('div');
     this.isData = true;
     this.data = State.getRating();
+    State.isGameStop = true;
 
     this.render();
   }
 
-  render = () => {
+  private render = () => {
     let view = `
     <div class="rating">
       <div class="spinner-wrap">
@@ -55,12 +56,24 @@ class Rating {
           ${cells}
         </tbody>
       </table>
-    </div>`;
+    </div>
+    `;
     }
 
-    this.gameRating.className = 'game__rating';
+    this.gameRating.className = 'game__rating game__rating_animate-add';
     this.gameRating.innerHTML = view;
     this.parentElem.appendChild(this.gameRating);
+  };
+
+  remove = () => {
+    State.isGameStop = false;
+    this.gameRating.classList.remove('game__rating_animate-add');
+    this.gameRating.classList.add('game__rating_animate-remove');
+
+    setTimeout(() => {
+      this.gameRating.remove();
+      this.remove();
+    }, 250);
   };
 }
 
