@@ -5,16 +5,19 @@ class State {
   static isGameStop: boolean = false;
   static idGame: string | null = null;
   static gameStartTime: number = Date.now();
-  static rating: IRatingData[] = [
-    /*  { name: 'test_2', isWin: false, steps: 20, score: 20, time: 20 },
+  static ratingStandard: IRatingData[] = [
+    { name: 'test_4', isWin: false, steps: 20, score: 20, time: 10 },
     { name: 'test_3', isWin: true, steps: 30, score: 20, time: 20 },
-    { name: 'test_2', isWin: false, steps: 20, score: 20, time: 20 },
-    { name: 'test_3', isWin: true, steps: 30, score: 20, time: 20 }, */
+    { name: 'test_2', isWin: false, steps: 20, score: 20, time: 30 },
+    { name: 'test_1', isWin: true, steps: 30, score: 20, time: 40 },
   ];
 
-  static getRating = () => {
-    return this.rating.sort((a, b) => a.time - b.time);
-  };
+  static ratingEndless: IRatingData[] = [
+    { name: 'test_4', isWin: false, steps: 20, score: 20, time: 10 },
+    { name: 'test_3', isWin: true, steps: 30, score: 20, time: 20 },
+    { name: 'test_2', isWin: false, steps: 20, score: 20, time: 30 },
+    { name: 'test_1', isWin: true, steps: 30, score: 20, time: 40 },
+  ];
 
   static gameStarts = () => {
     this.idGame = uuidv4();

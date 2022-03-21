@@ -1,5 +1,6 @@
 import State from '../../state/State';
 import { IRenderResult } from '../../types/type';
+import OptionsGame from '../options/options-game';
 
 class Result {
   private parentElem: HTMLElement;
@@ -23,7 +24,7 @@ class Result {
     this.time = State.getGameTime();
 
     const view = `
-    <div name="result" class="result" >
+    <div class="result" >
     <div class="result__wrap">
       ${
         isWin
@@ -46,8 +47,8 @@ class Result {
        <input class="result__input-name" type="text" placeholder="Enter your name" autocomplete="off"/>
       </div>
       <div class="result__wrap btn-wrap">
-        <button class="btn result__btn-submit" >Ok</button>
-        <button class="btn result__btn-cancel">Cancel</button>
+        <button class="btn result__btn_submit" >Ok</button>
+        <button class="btn result__btn_cancel">Cancel</button>
       </div>
     </div>
   `;
@@ -60,8 +61,8 @@ class Result {
 
   private listener = () => {
     if (this.gameResult) {
-      const submit = this.gameResult.querySelector('.result__btn-submit');
-      const cancel = this.gameResult.querySelector('.result__btn-cancel');
+      const submit = this.gameResult.querySelector('.result__btn_submit');
+      const cancel = this.gameResult.querySelector('.result__btn_cancel');
       this.inputName = this.gameResult.querySelector<HTMLInputElement>(
         '.result__input-name',
       );
@@ -82,13 +83,21 @@ class Result {
   };
   private submit = () => {
     if (this.inputName && this.inputName.value) {
-      State.rating.push({
-        name: this.inputName.value,
-        isWin: this.isWin,
-        steps: this.steps,
-        score: this.score,
-        time: this.time,
-      });
+      OptionsGame.gameVariant === '2048'
+        ? State.ratingStandard.push({
+            name: this.inputName.value,
+            isWin: this.isWin,
+            steps: this.steps,
+            score: this.score,
+            time: this.time,
+          })
+        : State.ratingEndless.push({
+            name: this.inputName.value,
+            isWin: this.isWin,
+            steps: this.steps,
+            score: this.score,
+            time: this.time,
+          });
     }
 
     this.cancel();

@@ -6,16 +6,29 @@ class Rating {
   private gameRating: HTMLElement;
   private isData: boolean;
   private data: IRatingData[] | [];
+  private variant: string;
 
-  constructor(parentElem: HTMLElement) {
+  constructor(parentElem: HTMLElement, variant = 'standard') {
     this.parentElem = parentElem;
     this.gameRating = document.createElement('div');
     this.isData = true;
-    this.data = State.getRating();
+    this.variant = variant;
+    this.data =
+      this.variant === 'standard'
+        ? this.getStandardRating()
+        : this.getEndlessRating();
     State.isGameStop = true;
 
     this.render();
+    this.listener();
   }
+
+  private getStandardRating = () => {
+    return State.ratingStandard.sort((a, b) => a.time - b.time);
+  };
+  private getEndlessRating = () => {
+    return State.ratingEndless.sort((a, b) => a.steps - b.steps);
+  };
 
   private render = () => {
     let view = `
@@ -41,7 +54,9 @@ class Rating {
         .join(' ');
 
       view = `<div class="rating">
-      <h2 class="rating__title">Rating</h2>
+      <h2 class="rating__title title">Rating ${
+        this.variant === 'standard' ? '2048' : 'Endless'
+      }</h2>
       <table class="rating-table">
         <thead>
           <tr>
@@ -57,12 +72,21 @@ class Rating {
         </tbody>
       </table>
     </div>
+    <button class="btn rating__btn_rating_close">X</button>
     `;
     }
 
     this.gameRating.className = 'game__rating game__rating_animate-add';
     this.gameRating.innerHTML = view;
     this.parentElem.appendChild(this.gameRating);
+  };
+
+  private listener = () => {
+    if (this.gameRating) {
+      this.gameRating
+        .querySelector('.rating__btn_rating_close')
+        ?.addEventListener('click', this.remove);
+    }
   };
 
   remove = () => {

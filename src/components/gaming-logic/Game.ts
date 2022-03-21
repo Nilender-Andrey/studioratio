@@ -1,5 +1,6 @@
 import State from '../../state/State';
 import { RenderResultType } from '../../types/type';
+import OptionsGame from '../options/options-game';
 import MovePossibilityCheck from './Move-possibility-check';
 import Utils from './Utils';
 
@@ -26,7 +27,7 @@ class Game {
     renderResult: RenderResultType,
   ) {
     this.result = 0;
-    this.scoreForWin = 2048;
+    this.scoreForWin = OptionsGame.gameVariant === '2048' ? 2048 : Infinity;
     this.moves = 0;
     this.field = [
       [0, 0, 0, 0, 0],
@@ -54,7 +55,7 @@ class Game {
     this.isAllowedToDown = true;
     this.isWin = false;
 
-    this.tact();
+    this.getCells();
   }
 
   step = (direction: 'moveLeft' | 'moveRight' | 'moveUp' | 'moveDown') => {
@@ -62,7 +63,7 @@ class Game {
   };
 
   end = () => {
-    this.tact();
+    this.getCells();
     Utils.playSound('step');
   };
 
@@ -299,6 +300,12 @@ class Game {
       this.isWin = true;
       this.renderResult({ isWin: true, score: this.result, steps: this.moves });
     }
+  };
+
+  private getCells = () => {
+    new Array(OptionsGame.difficulty).fill(this.tact).forEach((item) => {
+      item();
+    });
   };
 
   private tact = () => {

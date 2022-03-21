@@ -2,10 +2,10 @@ import Keyboard from './Keyboard';
 import Swipe from './Swipe';
 import Game from '../gaming-logic/Game';
 import Result from '../result/Result';
-import Rating from '../rating/Rating';
 import State from '../../state/State';
 
 import { DirectionType } from '../../types/type';
+import Options from '../options/Options';
 
 class Control {
   private parentElement: HTMLElement;
@@ -15,7 +15,7 @@ class Control {
   private btnNewGame: HTMLElement | null = null;
   private btnOptions: HTMLElement | null = null;
   private gameBody: HTMLElement | null = null;
-  private rating: Rating | null = null;
+  private options: Options | null = null;
   private playGame: Game | null = null;
 
   constructor(parentElement: HTMLElement) {
@@ -81,12 +81,14 @@ class Control {
   };
 
   private openOptions = () => {
-    if (this.game) {
-      if (!this.rating) {
-        this.rating = new Rating(this.game);
+    if (this.game && this.btnOptions) {
+      if (!this.options) {
+        this.options = new Options(this.game);
+        this.btnOptions.innerHTML = '✖';
       } else {
-        this.rating.remove();
-        this.rating = null;
+        this.options.remove();
+        this.options = null;
+        this.btnOptions.innerHTML = '⚙️';
       }
     }
   };

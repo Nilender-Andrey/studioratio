@@ -1,7 +1,7 @@
 .game__result {
   position: absolute;
   bottom: var(--game-header-padding);
-  z-index: 9999999;
+  z-index: 10000;
 
   display: block;
 

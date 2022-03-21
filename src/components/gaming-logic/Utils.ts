@@ -1,3 +1,5 @@
+import OptionsGame from '../options/options-game';
+
 class Utils {
   private static randomNum = (num: number) => {
     const random = Math.floor(Math.random() * num);
@@ -41,8 +43,10 @@ class Utils {
   };
 
   static playSound(filename: string) {
-    const sound = new Audio(`./../src/assets/audio/${filename}.mp3`);
-    sound.play();
+    if (OptionsGame.sound) {
+      const sound = new Audio(`./../src/assets/audio/${filename}.mp3`);
+      sound.play();
+    }
   }
 }
 

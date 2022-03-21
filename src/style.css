@@ -1,5 +1,6 @@
 @import url('/src/components/result/result.css');
 @import url('/src/components/rating/rating.css');
+@import url('/src/components/options/options.css');
 
 * {
   box-sizing: border-box;
@@ -59,7 +60,6 @@ body {
   flex: 1 1 40%;
 
   padding: 15px;
-  margin-left: 10px;
 
   outline: none;
   border: 1px solid var(--btn-bg-color);
@@ -144,47 +144,92 @@ body {
 }
 
 .game-cell_color-color_2 {
-  z-index: 2;
+  z-index: 1;
   background-color: #eee4da;
 }
 .game-cell_color-color_4 {
-  z-index: 4;
+  z-index: 2;
   background-color: #ede0c8;
 }
 .game-cell_color-color_8 {
-  z-index: 8;
+  z-index: 3;
   background-color: #f2b179;
 }
 .game-cell_color-color_16 {
-  z-index: 16;
+  z-index: 4;
   background-color: #f59563;
 }
 .game-cell_color-color_32 {
-  z-index: 32;
+  z-index: 5;
   background-color: #f67c5f;
 }
 .game-cell_color-color_64 {
-  z-index: 64;
+  z-index: 6;
   background-color: #f65e3b;
 }
 .game-cell_color-color_128 {
-  z-index: 128;
+  z-index: 7;
   background-color: #edcf72;
 }
 .game-cell_color-color_256 {
-  z-index: 256;
+  z-index: 8;
   background-color: #edcc61;
 }
 .game-cell_color-color_512 {
-  z-index: 512;
+  z-index: 9;
   background-color: #edc850;
 }
 .game-cell_color-color_1024 {
-  z-index: 1024;
+  z-index: 10;
   background-color: #edc53f;
 }
 .game-cell_color-color_2048 {
-  z-index: 2048;
+  z-index: 11;
+  background-color: #edc22e;
+}
+
+.game-cell_color-color_4096 {
+  z-index: 12;
+  background-color: #eee4da;
+}
+.game-cell_color-color_8192 {
+  z-index: 13;
+  background-color: #ede0c8;
+}
+.game-cell_color-color_16384 {
+  z-index: 14;
+  background-color: #f2b179;
+}
+.game-cell_color-color_32768 {
+  z-index: 15;
+  background-color: #f59563;
+}
+.game-cell_color-color_65536 {
+  z-index: 16;
+  background-color: #f67c5f;
+}
+.game-cell_color-color_131072 {
+  z-index: 17;
+  background-color: #f65e3b;
+}
+.game-cell_color-color_262144 {
+  z-index: 18;
+  background-color: #edcf72;
+}
+.game-cell_color-color_524288 {
+  z-index: 19;
+  background-color: #edcc61;
+}
+.game-cell_color-color_1048576 {
+  z-index: 20;
+  background-color: #edc850;
+}
+.game-cell_color-color_2097152 {
+  z-index: 21;
+  background-color: #edc53f;
+}
+.game-cell_color-color_4194304 {
+  z-index: 22;
   background-color: #edc22e;
 }
 
@@ -284,9 +329,11 @@ body {
 
 .game__options-btn {
   flex: 1 1 auto;
-  padding: 3px 9px;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  font-size: 24px;
   margin-left: 5px;
-  font-size: 30px;
 }
 
 @media screen and (max-width: 500px), screen and (max-height: 640px) {

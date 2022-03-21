@@ -43,7 +43,7 @@ class Display {
       <div class="game__info">
         <div class="game__rules">Join the numbers and get to the <span>2048 tile!</span></div>
         <button class="game__new-game-btn btn">New Game</button>
-        <button class="game__options-btn btn">📊</button>
+        <button class="game__options-btn btn">⚙️</button>
       </div>
     `;
 

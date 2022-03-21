@@ -1,0 +1,82 @@
+.game__options {
+  position: absolute;
+
+  bottom: calc(var(--game-header-padding) / 2);
+  z-index: 1000;
+
+  width: calc(100% - 10px);
+  height: calc(
+    100% - var(--game-header-height) - var(--game-header-padding) / 2
+  );
+
+  border-radius: var(--border-radius-default);
+
+  animation: add ease-out 0.3s forwards;
+}
+
+.game__options_animate-add {
+  transform: scale(0);
+  animation: add ease-out 0.3s forwards;
+}
+
+.game__options_animate-remove {
+  transform: scale(0);
+  animation: remove ease-out 0.3s forwards;
+}
+
+.options {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: var(--border-radius-default);
+  border: 5px solid var(--result-form-border-color);
+  background-color: var(--result-form-bg);
+
+  text-align: center;
+
+  overflow-y: auto;
+}
+
+.options__wrap {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.options__title {
+  font-size: 24px;
+}
+
+.btn.options__label-difficulty,
+.btn.options__btn {
+  flex: 0 0 40%;
+  height: 50px;
+  padding: 0;
+}
+
+.btn.options__btn_sound {
+  font-size: 24px;
+}
+
+.btn.options__label-difficulty {
+  flex: 0 0 30%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding: 0;
+
+  font-size: 24px;
+}
+.options__input-difficulty {
+  width: 20px;
+  height: 20px;
+
+  margin-left: 10px;
+}
