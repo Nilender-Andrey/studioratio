@@ -1,4 +1,3 @@
-import State from '../../state/State';
 import Game from '../gaming-logic/Game';
 import Rating from '../rating/Rating';
 import OptionsGame from './options-game';
@@ -73,7 +72,6 @@ class Options {
   };
 
   remove = () => {
-    State.isGameStop = false;
     this.gameOptions.classList.remove('game__options_animate-add');
     this.gameOptions.classList.add('game__options_animate-remove');
 

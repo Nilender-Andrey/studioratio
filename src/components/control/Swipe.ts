@@ -53,6 +53,7 @@ class Swipe {
 
   private down = (e: MouseEvent | TouchEvent) => {
     e.preventDefault();
+    e.stopPropagation();
 
     this.startTime = Date.now();
     this.startPos = this.endPos = Swipe.position(e);
@@ -60,6 +61,7 @@ class Swipe {
 
   private up = (e: MouseEvent | TouchEvent) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const elapsedTime = Date.now() - this.startTime;
 
@@ -80,7 +82,7 @@ class Swipe {
 
   private addListeners = () => {
     this.elem.addEventListener('touchstart', this.down);
-    document.addEventListener('touchend', this.up);
+    this.elem.addEventListener('touchend', this.up);
 
     this.elem.addEventListener('mousedown', this.down);
     document.addEventListener('mouseup', this.up);

@@ -35,8 +35,8 @@ class Result {
       <div class="result__wrap">
       ${
         isWin
-          ? '<img class="result__img" src="./src/assets/win.jpg" alt="win">'
-          : ' <img class="result__img" src="./src/assets/lose.jpg" alt="lose">'
+          ? '<img class="result__img" src="./win.jpg" alt="win">'
+          : ' <img class="result__img" src="./lose.jpg" alt="lose">'
       }
       </div>
       <div class="result__wrap">

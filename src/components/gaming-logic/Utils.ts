@@ -44,7 +44,7 @@ class Utils {
 
   static playSound(filename: string) {
     if (OptionsGame.sound) {
-      const sound = new Audio(`./../src/assets/audio/${filename}.mp3`);
+      const sound = new Audio(`./audio/${filename}.mp3`);
       sound.play();
     }
   }

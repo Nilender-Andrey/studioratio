@@ -86,11 +86,13 @@ class Control {
           parentElem: this.game,
           playGame: this.playGame,
         });
+        State.isGameStop = true;
         this.btnOptions.innerHTML = '✖';
       } else {
         this.options.remove();
         this.options = null;
         this.btnOptions.innerHTML = '⚙️';
+        State.isGameStop = false;
       }
     }
   };
