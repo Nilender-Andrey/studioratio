@@ -26,6 +26,7 @@ class Game {
     gameBody: HTMLElement,
     renderResult: RenderResultType,
   ) {
+    State.gameMoves = [];
     this.result = 0;
     this.scoreForWin = OptionsGame.gameVariant === '2048' ? 2048 : Infinity;
     this.moves = 0;
@@ -62,14 +63,16 @@ class Game {
     if (!State.isGameStop) this[direction]();
   };
 
-  end = () => {
+  private end = () => {
     this.getCells();
     Utils.playSound('step');
   };
 
-  moveLeft() {
+  private moveLeft() {
     if (!this.isAllowedToLeft || this.isWin) return;
+    this.saveStep();
     this.updateMoves();
+
     for (let j = 0; j <= 4; j++) {
       let l = 0;
       for (let i = 0; i <= 4; i++) {
@@ -102,9 +105,11 @@ class Game {
     this.end();
   }
 
-  moveRight() {
+  private moveRight() {
     if (!this.isAllowedToRight || this.isWin) return;
+    this.saveStep();
     this.updateMoves();
+
     for (let j = 0; j <= 4; j++) {
       let l = 3;
       for (let i = 4; i >= 0; i--) {
@@ -137,9 +142,11 @@ class Game {
     this.end();
   }
 
-  moveUp() {
+  private moveUp() {
     if (!this.isAllowedToUp || this.isWin) return;
+    this.saveStep();
     this.updateMoves();
+
     for (let i = 0; i <= 4; i++) {
       let l = 0;
       for (let j = 0; j <= 4; j++) {
@@ -172,8 +179,9 @@ class Game {
     this.end();
   }
 
-  moveDown() {
+  private moveDown() {
     if (!this.isAllowedToDown || this.isWin) return;
+    this.saveStep();
     this.updateMoves();
 
     for (let i = 0; i <= 4; i++) {
@@ -249,7 +257,6 @@ class Game {
 
   private updateMoves = () => {
     this.moves++;
-    console.log(this.moves);
     this.elemShowingMoves.textContent = this.moves.toString();
   };
 
@@ -318,6 +325,38 @@ class Game {
     }
 
     this.checkToLose();
+  };
+
+  private saveStep = () => {
+    const field = JSON.parse(JSON.stringify(this.field));
+
+    State.gameMoves.push({
+      result: this.result,
+      moves: this.moves,
+      field,
+    });
+  };
+
+  stepBack = () => {
+    if (State.gameMoves.length) {
+      const step = State.gameMoves.pop();
+      if (step) {
+        Utils.removeAllElements(this.gameBody, 'game-cell');
+        this.result = step.result;
+        this.moves = step.moves;
+        this.field = step.field;
+        this.elemShowingScore.textContent = this.result.toString();
+        this.elemShowingMoves.textContent = this.moves.toString();
+
+        for (let y = 0; y <= 4; y++) {
+          for (let x = 0; x <= 4; x++) {
+            if (this.field[y][x]) {
+              this.createRandomCell(this.field[y][x], x, y);
+            }
+          }
+        }
+      }
+    }
   };
 }
 

@@ -1,9 +1,10 @@
-import { IRatingData } from '../types/type';
+import { IGameMoves, IRatingData } from '../types/type';
 import { v4 as uuidv4 } from 'uuid';
 
 class State {
   static isGameStop: boolean = false;
   static idGame: string | null = null;
+  static gameMoves: IGameMoves[] = [];
   static gameStartTime: number = Date.now();
   static ratingStandard: IRatingData[] = [
     { name: 'test_4', isWin: false, steps: 20, score: 20, time: 10 },

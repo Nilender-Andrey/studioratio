@@ -48,6 +48,12 @@ class Utils {
       sound.play();
     }
   }
+
+  static removeAllElements = (parentElem: HTMLElement, className: string) => {
+    parentElem
+      .querySelectorAll(`.${className}`)
+      .forEach((item) => item.remove());
+  };
 }
 
 export default Utils;

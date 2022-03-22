@@ -17,3 +17,9 @@ export type RenderResultType = ({ isWin, score, steps }: IRenderResult) => void;
 export type DirectionType = 'moveLeft' | 'moveRight' | 'moveUp' | 'moveDown';
 
 export type MoveType = (direction: DirectionType) => void;
+
+export interface IGameMoves {
+  result: number;
+  moves: number;
+  field: number[][];
+}

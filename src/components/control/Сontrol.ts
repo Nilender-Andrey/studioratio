@@ -6,6 +6,7 @@ import State from '../../state/State';
 
 import { DirectionType } from '../../types/type';
 import Options from '../options/Options';
+import Utils from '../gaming-logic/Utils';
 
 class Control {
   private parentElement: HTMLElement;
@@ -65,9 +66,7 @@ class Control {
     ) {
       this.playGame = null;
       State.gameStarts();
-      this.gameBody
-        .querySelectorAll('.game-cell')
-        .forEach((item) => item.remove());
+      Utils.removeAllElements(this.gameBody, 'game-cell');
 
       const renderResult = new Result(this.game).render;
 
@@ -83,7 +82,10 @@ class Control {
   private openOptions = () => {
     if (this.game && this.btnOptions) {
       if (!this.options) {
-        this.options = new Options(this.game);
+        this.options = new Options({
+          parentElem: this.game,
+          playGame: this.playGame,
+        });
         this.btnOptions.innerHTML = '✖';
       } else {
         this.options.remove();

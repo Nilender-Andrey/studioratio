@@ -1,14 +1,22 @@
 import State from '../../state/State';
+import Game from '../gaming-logic/Game';
 import Rating from '../rating/Rating';
 import OptionsGame from './options-game';
+
+interface IOptions {
+  parentElem: HTMLElement;
+  playGame: Game | null;
+}
 
 class Options {
   private gameOptions: HTMLDivElement;
   private parentElem: HTMLElement;
+  private playGame: Game | null = null;
 
-  constructor(parentElem: HTMLElement) {
+  constructor({ parentElem, playGame }: IOptions) {
     this.parentElem = parentElem;
     this.gameOptions = document.createElement('div');
+    this.playGame = playGame;
 
     this.render();
     this.listener();
@@ -19,7 +27,7 @@ class Options {
     const view = `
     <div  class="options">
       <div class="options__wrap">
-        <button class="btn options__btn options__btn_step">Step back</button>
+        <button class="btn options__btn options__btn_step_back">Step back</button>
       </div>
      
       <h2 class="options__title title">Options</h2>
@@ -90,6 +98,9 @@ class Options {
       if (target.classList.contains('options__btn_duration')) {
         this.changeTypeGame(target);
       }
+      if (target.classList.contains('options__btn_step_back')) {
+        this.stepBack();
+      }
     }
   };
 
@@ -111,8 +122,6 @@ class Options {
       btn.innerHTML = '2048';
       OptionsGame.gameVariant = '2048';
     }
-
-    console.log(OptionsGame.gameVariant);
   };
 
   private openStandardRating = (variant: string) => {
@@ -124,6 +133,10 @@ class Options {
   private changeHandler = (e: Event) => {
     const target = <HTMLInputElement>e.target;
     OptionsGame.difficulty = +target.value;
+  };
+
+  private stepBack = () => {
+    if (this.playGame) this.playGame.stepBack();
   };
 }
 

@@ -42,7 +42,6 @@ class MovePossibilityCheck {
     for (let i = 0; i <= 4; i++) {
       for (let j = 3; j >= 0; j--) {
         if (field[j][i]) {
-          console.log(field[j + 1][i]);
           if (field[j][i] === field[j + 1][i] || field[j + 1][i] === 0) {
             return true;
           }
