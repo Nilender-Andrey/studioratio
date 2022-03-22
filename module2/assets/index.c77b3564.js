@@ -27,7 +27,7 @@ var v=Object.defineProperty;var y=(r,e,s)=>e in r?v(r,e,{enumerable:!0,configura
       ${e?'<p class="result__text"><span>Victory</span></p>':'<p class="result__text"><span>Losing</span></p>'}  
       </div>
       <div class="result__wrap">
-      ${e?'<img class="result__img" src="./src/assets/win.jpg" alt="win">':' <img class="result__img" src="./src/assets/lose.jpg" alt="lose">'}
+      ${e?'<img class="result__img" src="./win.jpg" alt="win">':' <img class="result__img" src="./lose.jpg" alt="lose">'}
       </div>
       <div class="result__wrap">
          <p class="result__text">Your result: <span>${a}steps</span>,
