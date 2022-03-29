@@ -4,6 +4,8 @@ export interface IRatingData {
   steps: number;
   score: number;
   time: number;
+  isEndless: boolean;
+  difficulty: number;
 }
 
 export interface IRenderResult {
@@ -22,4 +24,15 @@ export interface IGameMoves {
   result: number;
   moves: number;
   field: number[][];
+}
+
+export interface IRecord {
+  name: string;
+  isWin: boolean;
+  steps: number;
+  score: number;
+  startTime: number;
+  endTime: number;
+  isEndless: boolean;
+  difficulty: number;
 }

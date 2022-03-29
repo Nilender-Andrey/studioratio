@@ -39,7 +39,10 @@ class Utils {
 
   static calculateFontSize = (baseFontSize: number, num: number) => {
     const numLength = num.toString().length;
-    return numLength === 1 ? baseFontSize : baseFontSize - numLength * 5;
+    const fontSize =
+      numLength === 1 ? baseFontSize : baseFontSize - numLength * 5;
+
+    return fontSize < 14 ? 14 : fontSize;
   };
 
   static playSound(filename: string) {

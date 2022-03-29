@@ -1,0 +1,23 @@
+.error {
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--result-form-bg);
+}
+
+.error__wrap {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+.error__text {
+  text-align: center;
+  font-size: 30px;
+}

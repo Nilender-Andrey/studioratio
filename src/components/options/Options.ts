@@ -5,24 +5,26 @@ import OptionsGame from './options-game';
 interface IOptions {
   parentElem: HTMLElement;
   playGame: Game | null;
+  newGame: () => void;
 }
 
 class Options {
   private gameOptions: HTMLDivElement;
   private parentElem: HTMLElement;
   private playGame: Game | null = null;
+  private newGame: () => void;
 
-  constructor({ parentElem, playGame }: IOptions) {
+  constructor({ parentElem, playGame, newGame }: IOptions) {
     this.parentElem = parentElem;
     this.gameOptions = document.createElement('div');
     this.playGame = playGame;
-
+    this.newGame = newGame;
     this.render();
     this.listener();
   }
 
   private render = () => {
-    const { sound, gameVariant, difficulty } = OptionsGame;
+    const { sound, isEndless, difficulty } = OptionsGame;
     const view = `
     <div  class="options">
       <div class="options__wrap">
@@ -34,7 +36,9 @@ class Options {
         <button class="btn options__btn options__btn_sound">${
           sound ? '🔊' : '🔈'
         }</button>
-        <button class="btn options__btn options__btn_duration">${gameVariant}</button>
+        <button class="btn options__btn options__btn_duration">${
+          isEndless ? 'Endless' : '2048'
+        }</button>
       </div>
       
       <h2 class="options__title title">Game difficulty</h2>
@@ -88,10 +92,10 @@ class Options {
         this.changeSound(target);
       }
       if (target.classList.contains('options__btn_rating_2048')) {
-        this.openStandardRating('standard');
+        this.openRating('2048');
       }
       if (target.classList.contains('options__btn_rating_endless')) {
-        this.openStandardRating('endless');
+        this.openRating('Endless');
       }
       if (target.classList.contains('options__btn_duration')) {
         this.changeTypeGame(target);
@@ -113,16 +117,18 @@ class Options {
   };
 
   private changeTypeGame = (btn: HTMLButtonElement) => {
-    if (OptionsGame.gameVariant === '2048') {
-      btn.innerHTML = 'Endless';
-      OptionsGame.gameVariant = 'Endless';
-    } else {
+    if (OptionsGame.isEndless) {
       btn.innerHTML = '2048';
-      OptionsGame.gameVariant = '2048';
+      OptionsGame.isEndless = false;
+    } else {
+      btn.innerHTML = 'Endless';
+      OptionsGame.isEndless = true;
     }
+
+    this.newGame();
   };
 
-  private openStandardRating = (variant: string) => {
+  private openRating = (variant: string) => {
     if (this.gameOptions) {
       new Rating(this.gameOptions, variant);
     }
@@ -131,6 +137,8 @@ class Options {
   private changeHandler = (e: Event) => {
     const target = <HTMLInputElement>e.target;
     OptionsGame.difficulty = +target.value;
+
+    this.newGame();
   };
 
   private stepBack = () => {

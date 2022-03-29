@@ -28,7 +28,7 @@ class Game {
   ) {
     State.gameMoves = [];
     this.result = 0;
-    this.scoreForWin = OptionsGame.gameVariant === '2048' ? 2048 : Infinity;
+    this.scoreForWin = OptionsGame.isEndless ? Infinity : 8 /* 2048 */;
     this.moves = 0;
     this.field = [
       [0, 0, 0, 0, 0],

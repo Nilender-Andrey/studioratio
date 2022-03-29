@@ -1,5 +1,7 @@
+import ResultApi from '../../api/Api';
 import State from '../../state/State';
 import { IRenderResult } from '../../types/type';
+import Control from '../control/Сontrol';
 import OptionsGame from '../options/options-game';
 
 class Result {
@@ -9,7 +11,7 @@ class Result {
   private isWin = true;
   private score = 0;
   private steps = 0;
-  private time = 0;
+  private gameEnd = 0;
 
   constructor(parentElem: HTMLElement) {
     this.parentElem = parentElem;
@@ -21,7 +23,10 @@ class Result {
     this.isWin = isWin;
     this.score = score;
     this.steps = steps;
-    this.time = State.getGameTime();
+    this.gameEnd = Date.now();
+
+    Control.btnNewGame!.disabled = true;
+    Control.btnOptions!.disabled = true;
 
     const view = `
     <div class="result" >
@@ -40,8 +45,8 @@ class Result {
       }
       </div>
       <div class="result__wrap">
-         <p class="result__text">Your result: <span>${steps}steps</span>,
-          ${this.time}sec</p>
+         <p class="result__text">Your result: <span>${steps} steps</span>,
+          ${State.getGameTime(this.gameEnd)} sec</p>
       </div>
       <div class="result__wrap input-wrap">
        <input class="result__input-name" type="text" placeholder="Enter your name" autocomplete="off"/>
@@ -79,25 +84,26 @@ class Result {
       State.isGameStop = false;
       this.inputName.value = '';
       this.gameResult.remove();
+
+      Control.btnNewGame!.disabled = false;
+      Control.btnOptions!.disabled = false;
     }
   };
+
   private submit = () => {
     if (this.inputName && this.inputName.value) {
-      OptionsGame.gameVariant === '2048'
-        ? State.ratingStandard.push({
-            name: this.inputName.value,
-            isWin: this.isWin,
-            steps: this.steps,
-            score: this.score,
-            time: this.time,
-          })
-        : State.ratingEndless.push({
-            name: this.inputName.value,
-            isWin: this.isWin,
-            steps: this.steps,
-            score: this.score,
-            time: this.time,
-          });
+      const data = {
+        name: this.inputName.value,
+        isWin: this.isWin,
+        steps: this.steps,
+        score: this.score,
+        startTime: State.gameStartTime,
+        endTime: this.gameEnd,
+        isEndless: OptionsGame.isEndless,
+        difficulty: OptionsGame.difficulty,
+      };
+
+      ResultApi.submitRecord(data);
     }
 
     this.cancel();
